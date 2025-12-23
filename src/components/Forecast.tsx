@@ -13,16 +13,16 @@ export const Forecast: FC = () => {
       justifyContent="center"
     >
       <Grid size={{ xs: 1, md: 0.7 }}>
-        <WeatherCard city="london" />
+        <WeatherCard city="new york" />
       </Grid>
       <Grid size={{ xs: 1, sm: 0.7 }}>
         <WeatherCard city="london" />
       </Grid>
       <Grid size={{ xs: 1, sm: 0.7 }}>
-        <WeatherCard city="london" />
+        <WeatherCard city="eilat" />
       </Grid>
       <Grid size={{ xs: 1, sm: 0.7 }}>
-        <WeatherCard city="london" />
+        <WeatherCard city="alaska" />
       </Grid>
     </Grid>
   );
