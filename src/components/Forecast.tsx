@@ -3,6 +3,8 @@ import { Grid } from "@mui/material";
 import { WeatherCard } from "./WeatherCard";
 
 export const Forecast: FC = () => {
+  const cities: string[] = ["new york", "london", "eilat", "alaska"];
+
   return (
     <Grid
       mb={6}
@@ -12,18 +14,11 @@ export const Forecast: FC = () => {
       padding={15}
       justifyContent="center"
     >
-      <Grid size={{ xs: 1, md: 0.7 }}>
-        <WeatherCard city="new york" />
-      </Grid>
-      <Grid size={{ xs: 1, sm: 0.7 }}>
-        <WeatherCard city="london" />
-      </Grid>
-      <Grid size={{ xs: 1, sm: 0.7 }}>
-        <WeatherCard city="eilat" />
-      </Grid>
-      <Grid size={{ xs: 1, sm: 0.7 }}>
-        <WeatherCard city="alaska" />
-      </Grid>
+      {cities.map((city) => (
+        <Grid size={{ xs: 6, sm: 0.7, md: 0.7, lg: 0.7 }}>
+          <WeatherCard city={city} />
+        </Grid>
+      ))}
     </Grid>
   );
 };

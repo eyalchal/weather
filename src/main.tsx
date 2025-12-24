@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
+import { App } from "./components/App";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { App } from "./components/App";
 
 const queryClient = new QueryClient();
 
