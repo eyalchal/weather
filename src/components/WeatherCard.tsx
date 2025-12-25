@@ -5,13 +5,14 @@ import SunnyIcon from "@mui/icons-material/Sunny";
 import CloudIcon from "@mui/icons-material/Cloud";
 import { useWeather } from "../hooks/useGetWeather";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
+import { COLD_TEMPERATURE, HOT_TEMPERATURE } from "../constants";
 
 interface IWeatherCardProps {
-  city: string;
+  location: string;
 }
 
-export const WeatherCard: FC<IWeatherCardProps> = ({ city }) => {
-  const { data: weather, status } = useWeather(city);
+export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
+  const { data: weather, status } = useWeather(location);
 
   console.log("weather", weather, status);
 
@@ -19,19 +20,14 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ city }) => {
 
   if (status === "success") {
     icon =
-      weather.feelsLike < 20 ? (
+      weather.feelsLike < COLD_TEMPERATURE ? (
         <FlashOnIcon
-          display="flex"
           sx={{ color: ICON_COLORS.COLD, fontSize: "h4.fontSize" }}
         />
-      ) : weather.feelsLike > 30 ? (
-        <SunnyIcon
-          display="flex"
-          sx={{ color: ICON_COLORS.HOT, fontSize: "h4.fontSize" }}
-        />
+      ) : weather.feelsLike > HOT_TEMPERATURE ? (
+        <SunnyIcon sx={{ color: ICON_COLORS.HOT, fontSize: "h4.fontSize" }} />
       ) : (
         <CloudIcon
-          display="flex"
           sx={{ color: ICON_COLORS.PLEASANT, fontSize: "h4.fontSize" }}
         />
       );
@@ -40,7 +36,6 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ city }) => {
   return (
     <>
       {status === "error" && <div>Error fetching data</div>}
-
       {status === "pending" && <div>Loading data...</div>}
       {status === "success" && (
         <Box
@@ -59,13 +54,8 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ city }) => {
             }}
           >
             {icon}
-            <Typography
-              display="flex"
-              color="black"
-              variant="h5"
-              sx={{ fontWeight: "bold" }}
-            >
-              {weather.city}
+            <Typography color="black" variant="h5" sx={{ fontWeight: "bold" }}>
+              {weather.location}
             </Typography>
           </Box>
           <Typography color="#8F8F8F" sx={{ my: 1 }} align="right">
@@ -75,7 +65,6 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ city }) => {
             sx={{
               padding: 1,
               display: "flex",
-
               flexDirection: "row-reverse",
               justifyContent: "space-around",
             }}
