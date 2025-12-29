@@ -1,5 +1,7 @@
+import type { TLocation } from "../types";
+
 export interface WeatherApiResponse {
-  location: string;
+  location: TLocation;
   description: string;
   temperature: number;
   feelsLike: number;
@@ -9,7 +11,7 @@ export interface WeatherApiResponse {
 const API_KEY = "e0d49b0e1b8c6b63590281dd41f6aff3";
 
 export const fetchWeather = async (
-  location: string
+  location: TLocation
 ): Promise<WeatherApiResponse> => {
   const res = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=he&appid=${API_KEY}`

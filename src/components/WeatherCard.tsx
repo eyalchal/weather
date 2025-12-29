@@ -6,9 +6,10 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import { useWeather } from "../hooks/useGetWeather";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import { COLD_TEMPERATURE, HOT_TEMPERATURE } from "../constants";
+import type { TLocation } from "../types";
 
 interface IWeatherCardProps {
-  location: string;
+  location: TLocation;
 }
 
 export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
@@ -21,15 +22,11 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
   if (status === "success") {
     icon =
       weather.feelsLike < COLD_TEMPERATURE ? (
-        <FlashOnIcon
-          sx={{ color: ICON_COLORS.COLD, fontSize: "h4.fontSize" }}
-        />
+        <FlashOnIcon sx={{ color: ICON_COLORS.COLD, fontSize: "2.5rem" }} />
       ) : weather.feelsLike > HOT_TEMPERATURE ? (
-        <SunnyIcon sx={{ color: ICON_COLORS.HOT, fontSize: "h4.fontSize" }} />
+        <SunnyIcon sx={{ color: ICON_COLORS.HOT, fontSize: "2.5rem" }} />
       ) : (
-        <CloudIcon
-          sx={{ color: ICON_COLORS.PLEASANT, fontSize: "h4.fontSize" }}
-        />
+        <CloudIcon sx={{ color: ICON_COLORS.PLEASANT, fontSize: "2.5rem" }} />
       );
   }
 

@@ -7,12 +7,12 @@ import { Forecast } from "./Forecast";
 export const App: FC = () => {
   return (
     <>
+      <Header />
       <Box
         sx={{
+          //overflow: "auto",
           bgcolor: theme.palette.primary.main,
           position: "fixed",
-          top: 0,
-          left: 0,
           width: "100%",
           height: "100%",
           display: "flex",
@@ -20,7 +20,6 @@ export const App: FC = () => {
           alignItems: "center",
         }}
       >
-        <Header />
         <Forecast />
       </Box>
     </>
