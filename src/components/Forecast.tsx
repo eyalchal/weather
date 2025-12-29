@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import { Grid } from "@mui/material";
 import { WeatherCard } from "./WeatherCard";
 import { useAppSelector } from "../redux/redux.hooks";
@@ -24,6 +24,8 @@ export const Forecast: FC = () => {
     (state) => state.locations.locations
   );
 
+  console.log("locations in Forecast:", locations);
+
   return (
     <Grid
       mb={6}
@@ -34,7 +36,10 @@ export const Forecast: FC = () => {
       alignItems="center"
     >
       {locations.map((location) => (
-        <Grid size={0.7}>
+        <Grid size={1}
+        /*onClick={() => {
+          console.log("Clicked location:", location);
+        }}*/ key={location}>
           <WeatherCard location={location} />
         </Grid>
       ))}

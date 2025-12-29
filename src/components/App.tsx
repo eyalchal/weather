@@ -3,6 +3,7 @@ import { theme } from "../style";
 import { Header } from "./Header";
 import { Box } from "@mui/material";
 import { Forecast } from "./Forecast";
+import { InsertLocation } from "./InsertLocation";
 
 export const App: FC = () => {
   return (
@@ -21,6 +22,7 @@ export const App: FC = () => {
         }}
       >
         <Forecast />
+        <InsertLocation />
       </Box>
     </>
   );

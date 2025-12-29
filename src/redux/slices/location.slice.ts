@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { TLocation } from "../../types";
 
 const initialState = {
-   locations: ["new york", "london", "eilat", "alaska"],
+  locations: ["new york", "london", "eilat", "alaska"],
   // locations: [] as TLocation[],
 };
 
