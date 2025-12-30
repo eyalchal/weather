@@ -1,8 +1,8 @@
-import { Box, Button, TextField } from "@mui/material";
 import { useState, type FC } from "react";
 import { useDispatch } from "react-redux";
+import { Box, Button, TextField } from "@mui/material";
+import { buttonText, label } from "./insertlocation.constant";
 import { addLocation } from "../../redux/slices/location.slice";
-import { theme } from "../../style";
 import { boxStyle, buttonStyle, inputProps } from "./InsertLocation.style";
 
 export const InsertLocation: FC = () => {
@@ -19,18 +19,18 @@ export const InsertLocation: FC = () => {
     <>
       <Box sx={boxStyle}>
         <TextField
+          label={label}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          defaultValue={"Location"}
           variant="filled"
           InputProps={inputProps}
         ></TextField>
         <Button
+          sx={buttonStyle}
           onClick={handleButtonClick}
           variant="contained"
-          sx={buttonStyle}
         >
-          הוסף תחזית
+          {buttonText}
         </Button>
       </Box>
     </>

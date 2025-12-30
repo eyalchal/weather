@@ -1,5 +1,5 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { TLocation } from "../../types";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   locations: ["new york", "london", "eilat", "alaska"],

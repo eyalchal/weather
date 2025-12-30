@@ -1,14 +1,3 @@
-import PleasentIcon from "@mui/icons-material/Cloud";
-import ColdIcon from "@mui/icons-material/FlashOn";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import HotICon from "@mui/icons-material/Sunny";
-import { Box, CircularProgress, Typography } from "@mui/material";
-import type { FC } from "react";
-import { useDispatch } from "react-redux";
-import { useWeather } from "../../hooks/useGetWeather";
-import { removeLocation } from "../../redux/slices/location.slice";
-import { black, theme } from "../../style";
-import type { TLocation } from "../../types";
 import {
   COLD_TEMPERATURE,
   EStatus,
@@ -26,6 +15,17 @@ import {
   statsBoxStyle,
   statsDescBoxStyle,
 } from "./weathercard.style";
+import type { FC } from "react";
+import { useDispatch } from "react-redux";
+import { black, theme } from "../../style";
+import type { TLocation } from "../../types";
+import HotICon from "@mui/icons-material/Sunny";
+import ColdIcon from "@mui/icons-material/FlashOn";
+import PleasentIcon from "@mui/icons-material/Cloud";
+import { useWeather } from "../../hooks/useGetWeather";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { removeLocation } from "../../redux/slices/location.slice";
 
 interface IWeatherCardProps {
   location: TLocation;
