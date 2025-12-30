@@ -9,8 +9,4 @@ export const theme = {
   },
 };
 
-export const ICON_COLORS = {
-  HOT: "#EEBD11",
-  COLD: "#3F50B5",
-  PLEASANT: "#68D0F1",
-};
+export const black = "black";

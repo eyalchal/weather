@@ -1,10 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState, type FC } from "react";
-import { theme } from "../style";
 import { useDispatch } from "react-redux";
-import { addLocation } from "../redux/slices/location.slice";
-import { useAppSelector } from "../redux/redux.hooks";
-import type { TLocation } from "../types";
+import { addLocation } from "../../redux/slices/location.slice";
+import { theme } from "../../style";
+import { boxStyle, buttonStyle, inputProps } from "./InsertLocation.style";
 
 export const InsertLocation: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -12,29 +11,26 @@ export const InsertLocation: FC = () => {
   const dispatch = useDispatch();
 
   const handleButtonClick = (): void => {
-    alert(inputValue);
+    console.log("adding weather for: ", inputValue);
     dispatch(addLocation(inputValue));
   };
 
   return (
     <>
-      <Box sx={{ position: "fixed", bottom: 20, display: "flex", gap: 2, marginTop: 2, alignItems: "center" }}>
+      <Box sx={boxStyle}>
         <TextField
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           defaultValue={"Location"}
           variant="filled"
+          InputProps={inputProps}
         ></TextField>
         <Button
           onClick={handleButtonClick}
           variant="contained"
-          sx={{
-            backgroundColor: theme.palette.secondary.main,
-            color: "black",
-            fontWeight: "bold",
-          }}
+          sx={buttonStyle}
         >
-          Add Location
+          הוסף תחזית
         </Button>
       </Box>
     </>

@@ -1,11 +1,11 @@
 import type { TLocation } from "../types";
 
 export interface WeatherApiResponse {
+  humidity: number;
+  feelsLike: number;
   location: TLocation;
   description: string;
   temperature: number;
-  feelsLike: number;
-  humidity: number;
 }
 
 const API_KEY = "e0d49b0e1b8c6b63590281dd41f6aff3";
@@ -23,9 +23,9 @@ export const fetchWeather = async (
 
   return {
     location: data.name,
-    description: data.weather[0].description,
-    temperature: Math.round(data.main.temp),
-    feelsLike: Math.round(data.main.feels_like),
     humidity: data.main.humidity,
+    temperature: Math.round(data.main.temp),
+    description: data.weather[0].description,
+    feelsLike: Math.round(data.main.feels_like),
   };
 };

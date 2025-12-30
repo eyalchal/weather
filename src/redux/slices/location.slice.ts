@@ -3,7 +3,6 @@ import type { TLocation } from "../../types";
 
 const initialState = {
   locations: ["new york", "london", "eilat", "alaska"],
-  // locations: [] as TLocation[],
 };
 
 const locationSlice = createSlice({
@@ -11,7 +10,10 @@ const locationSlice = createSlice({
   initialState,
   reducers: {
     addLocation(state, action: PayloadAction<TLocation>) {
-      state.locations.push(action.payload);
+      // Prevent adding duplicate locations
+      if (!state.locations.includes(action.payload)) {
+        state.locations.push(action.payload);
+      }
     },
     removeLocation(state, action: PayloadAction<TLocation>) {
       state.locations = state.locations.filter(
