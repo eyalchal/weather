@@ -1,7 +1,7 @@
-import { useState, type FC } from "react";
+import { useState, type FC, type KeyboardEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Box, Button, colors, TextField } from "@mui/material";
-import { buttonText, label } from "./insertlocation.constant";
+import { buttonText, EKey, label } from "./insertlocation.constant";
 import { addLocation } from "../../redux/slices/location.slice";
 import { boxStyle, buttonStyle, inputProps } from "./InsertLocation.style";
 import { black } from "../../style";
@@ -12,6 +12,16 @@ export const InsertLocation: FC = () => {
   const dispatch = useDispatch();
 
   const handleButtonClick = (): void => {
+    dispatchAddLocation();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === EKey.Enter) {
+      dispatchAddLocation();
+    }
+  };
+
+  const dispatchAddLocation = (): void => {
     dispatch(addLocation(inputValue));
   };
 
@@ -30,13 +40,14 @@ export const InsertLocation: FC = () => {
             "&:hover .MuiOutlinedInput-notchedOutline": {
               borderWidth: 5, // Set hover border width
             },
-            // "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            //   borderWidth: 6, // Set focused border width
-            //   borderColor: "white",
-            // },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 6, // Set focused border width
+              borderColor: "white",
+            },
           }}
-          // InputLabelProps={{color:'primary', margin:'dense', }}
+          InputLabelProps={{ color: "primary", margin: "dense" }}
           InputProps={inputProps}
+          onKeyDown={handleKeyDown}
         ></TextField>
         <Button
           sx={buttonStyle}

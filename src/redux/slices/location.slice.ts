@@ -12,6 +12,8 @@ const locationSlice = createSlice({
     addLocation(state, action: PayloadAction<TLocation>) {
       console.log(`Adding weather for ${action.payload}`);
 
+      if (action.payload === "") return;
+
       // Prevent adding duplicate locations - case insensitive
       const isExist: boolean = state.locations.some(
         (loc: string) =>
