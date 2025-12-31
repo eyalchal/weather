@@ -17,7 +17,11 @@ export const fetchWeather = async (
     `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=he&appid=${API_KEY}`
   );
 
-  if (!res.ok) throw new Error("Failed to fetch weather");
+  if (res.ok) {
+    console.log(`Weather successfuly fetched for ${location}`);
+  } else {
+    console.log(`Failed to fetch weather for ${location}`);
+  }
 
   const data = await res.json();
 

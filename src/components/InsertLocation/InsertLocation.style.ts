@@ -15,6 +15,9 @@ export const buttonStyle = {
 };
 
 export const inputProps = {
+  sx: {
+    borderRadius: 2,
+  },
   style: {
     fontSize: "1.5rem",
   },

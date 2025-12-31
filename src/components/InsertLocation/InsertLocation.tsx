@@ -1,9 +1,10 @@
 import { useState, type FC } from "react";
 import { useDispatch } from "react-redux";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, colors, TextField } from "@mui/material";
 import { buttonText, label } from "./insertlocation.constant";
 import { addLocation } from "../../redux/slices/location.slice";
 import { boxStyle, buttonStyle, inputProps } from "./InsertLocation.style";
+import { black } from "../../style";
 
 export const InsertLocation: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -11,7 +12,6 @@ export const InsertLocation: FC = () => {
   const dispatch = useDispatch();
 
   const handleButtonClick = (): void => {
-    console.log("adding weather for: ", inputValue);
     dispatch(addLocation(inputValue));
   };
 
@@ -22,7 +22,20 @@ export const InsertLocation: FC = () => {
           label={label}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          variant="filled"
+          variant="outlined"
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 4, // Set the desired border width
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 5, // Set hover border width
+            },
+            // "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            //   borderWidth: 6, // Set focused border width
+            //   borderColor: "white",
+            // },
+          }}
+          // InputLabelProps={{color:'primary', margin:'dense', }}
           InputProps={inputProps}
         ></TextField>
         <Button

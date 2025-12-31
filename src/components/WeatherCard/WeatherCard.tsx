@@ -34,7 +34,7 @@ interface IWeatherCardProps {
 export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
   const { data: weather, status } = useWeather(location);
 
-  console.log("weather", weather, status);
+  console.log(weather);
 
   const renderIcon = () => {
     return weather!.feelsLike < COLD_TEMPERATURE ? (
@@ -49,14 +49,19 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
   const dispatch = useDispatch();
 
   const handleRemoveButton = () => {
-    console.log("Clicked remove icon for location:", location);
     dispatch(removeLocation(location));
   };
 
   return (
     <>
       {status === EStatus.Error && dispatch(removeLocation(location))}
-      {status === EStatus.Loading && <CircularProgress color="inherit" />}
+
+      {status === EStatus.Loading && (
+        <Box display={"flex"} justifyContent={"center"}>
+          <CircularProgress color="inherit" />
+        </Box>
+      )}
+
       {status === EStatus.Success && (
         <>
           <Box
