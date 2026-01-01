@@ -1,17 +1,26 @@
 import { theme } from "../../style";
 
 export const boxStyle = {
-  position: "fixed",
+  gap: 2,
   bottom: 20,
   display: "flex",
-  gap: 2,
+  position: "fixed",
   alignItems: "center",
 };
 
 export const buttonStyle = {
-  backgroundColor: theme.palette.secondary.main,
   color: "black",
   fontSize: "1.5rem",
+  backgroundColor: theme.palette.secondary.main,
+};
+
+export const textFieldStyle = {
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderWidth: 4,
+  },
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderWidth: 5,
+  },
 };
 
 export const inputProps = {

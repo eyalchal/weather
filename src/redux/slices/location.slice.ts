@@ -16,7 +16,7 @@ const locationSlice = createSlice({
 
       // Prevent adding duplicate locations - case insensitive
       const isExist: boolean = state.locations.some(
-        (loc: string) =>
+        (loc: TLocation) =>
           loc.toLocaleLowerCase() === action.payload.toLocaleLowerCase()
       );
 
