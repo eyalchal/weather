@@ -1,9 +1,10 @@
 import {
   boxStyle,
-  buttonStyle,
   inputProps,
+  buttonStyle,
   textFieldStyle,
 } from "./InsertLocation.style";
+
 import { useDispatch } from "react-redux";
 import { Box, Button, TextField } from "@mui/material";
 import { useState, type FC, type KeyboardEvent } from "react";
@@ -19,8 +20,8 @@ export const InsertLocation: FC = () => {
     dispatchAddLocation();
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === EKey.Enter) {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === EKey.Enter) {
       dispatchAddLocation();
     }
   };
@@ -35,16 +36,16 @@ export const InsertLocation: FC = () => {
         <TextField
           label={label}
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
           variant="outlined"
           sx={textFieldStyle}
           InputProps={inputProps}
           onKeyDown={handleKeyDown}
+          onChange={(event) => setInputValue(event.target.value)}
         ></TextField>
         <Button
           sx={buttonStyle}
-          onClick={handleButtonClick}
           variant="contained"
+          onClick={handleButtonClick}
         >
           {buttonText}
         </Button>

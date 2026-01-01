@@ -1,20 +1,22 @@
 import {
-  COLD_TEMPERATURE,
   EStatus,
   HOT_TEMPERATURE,
+  COLD_TEMPERATURE,
 } from "./weathercard.constant";
+
 import {
+  hotIconStyle,
   cardBoxStyle,
   coldIconStyle,
-  descriptionColor,
+  statsBoxStyle,
+  removeIconStyle,
   headCardBoxStyle,
-  hotIconStyle,
+  descriptionColor,
+  statsDescBoxStyle,
   pleasentIconStyle,
   removeIconBoxStyle,
-  removeIconStyle,
-  statsBoxStyle,
-  statsDescBoxStyle,
 } from "./weathercard.style";
+
 import type { FC } from "react";
 import { useDispatch } from "react-redux";
 import { black, theme } from "../../style";
@@ -65,11 +67,11 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
       {status === EStatus.Success && (
         <>
           <Box
-            component={"div"}
-            bgcolor={theme.palette.secondary.main}
             padding={2}
             borderRadius={2}
+            component={"div"}
             sx={cardBoxStyle}
+            bgcolor={theme.palette.secondary.main}
           >
             <Box sx={removeIconBoxStyle}>
               <RemoveCircleIcon
@@ -81,8 +83,8 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
             <Box sx={headCardBoxStyle}>
               {renderIcon()}
               <Typography
-                color={black}
                 variant="h5"
+                color={black}
                 sx={{ fontWeight: "bold" }}
               >
                 {weather.location}
