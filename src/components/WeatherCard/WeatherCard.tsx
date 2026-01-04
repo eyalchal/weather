@@ -2,7 +2,7 @@ import {
   EStatus,
   HOT_TEMPERATURE,
   COLD_TEMPERATURE,
-} from "./weathercard.constant";
+} from "../../constants/weathercard.constant";
 
 import {
   hotIconStyle,
@@ -20,7 +20,6 @@ import {
 import type { FC } from "react";
 import { useDispatch } from "react-redux";
 import { black, theme } from "../../style";
-import type { TLocation } from "../../types";
 import HotICon from "@mui/icons-material/Sunny";
 import ColdIcon from "@mui/icons-material/FlashOn";
 import PleasentIcon from "@mui/icons-material/Cloud";
@@ -30,22 +29,34 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { removeLocation } from "../../redux/slices/location.slice";
 
 interface IWeatherCardProps {
-  location: TLocation;
+  location: string;
 }
 
 export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
-  const { data: weather, status } = useWeather(location);
-
-  console.log(weather);
+  const { data: weather, status, isLoading } = useWeather(location);
 
   const renderIcon = () => {
-    return weather!.feelsLike < COLD_TEMPERATURE ? (
+    if (!weather) {
+      return;
+    }
+
+    /*return weather.feelsLike < COLD_TEMPERATURE ? (
       <ColdIcon sx={coldIconStyle} />
-    ) : weather!.feelsLike > HOT_TEMPERATURE ? (
+    ) : weather.feelsLike > HOT_TEMPERATURE ? (
       <HotICon sx={hotIconStyle} />
     ) : (
       <PleasentIcon sx={pleasentIconStyle} />
-    );
+    );*/
+
+    if (weather.feelsLike < COLD_TEMPERATURE) {
+      return <ColdIcon sx={coldIconStyle} />;
+    }
+
+    if (weather.feelsLike > HOT_TEMPERATURE) {
+      return <HotICon sx={hotIconStyle} />;
+    }
+
+    return <PleasentIcon sx={pleasentIconStyle} />;
   };
 
   const dispatch = useDispatch();

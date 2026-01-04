@@ -1,4 +1,4 @@
-import { ICON_COLORS } from "./weathercard.constant";
+import { ICON_COLORS } from "../../constants/weathercard.constant";
 
 export const hotIconStyle = { color: ICON_COLORS.HOT, fontSize: "2.5rem" };
 export const coldIconStyle = { color: ICON_COLORS.COLD, fontSize: "2.5rem" };

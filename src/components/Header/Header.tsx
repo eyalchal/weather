@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { black } from "../../style";
-import { headerText } from "./header.constant";
+import { headerText } from "../../constants/header.constant";
 import { appBarStyle, toolbarStyle } from "./header.style";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 

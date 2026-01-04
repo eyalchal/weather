@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { Box, Button, TextField } from "@mui/material";
 import { useState, type FC, type KeyboardEvent } from "react";
 import { addLocation } from "../../redux/slices/location.slice";
-import { buttonText, EKey, label } from "./insertlocation.constant";
+import { buttonText, Enter, label } from "../../constants/insertlocation.constant";
 
 export const InsertLocation: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -20,8 +20,8 @@ export const InsertLocation: FC = () => {
     dispatchAddLocation();
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
-    if (event.key === EKey.Enter) {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === Enter) {
       dispatchAddLocation();
     }
   };
