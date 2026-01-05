@@ -1,1 +1,1 @@
-export const headerText: string = "תחזית מסביב לעולם";
+export const HEADER_TEXT: string = "תחזית מסביב לעולם";

@@ -1,30 +1,27 @@
 import {
-  EStatus,
-  HOT_TEMPERATURE,
-  COLD_TEMPERATURE,
-} from "../../constants/weathercard.constant";
-
-import {
   hotIconStyle,
   cardBoxStyle,
   coldIconStyle,
-  statsBoxStyle,
   removeIconStyle,
   headCardBoxStyle,
   descriptionColor,
-  statsDescBoxStyle,
   pleasentIconStyle,
   removeIconBoxStyle,
 } from "./weathercard.style";
+
+import {
+  HOT_TEMPERATURE,
+  COLD_TEMPERATURE,
+} from "../../constants/weathercard.constant";
 
 import type { FC } from "react";
 import { useDispatch } from "react-redux";
 import { black, theme } from "../../style";
 import HotICon from "@mui/icons-material/Sunny";
 import ColdIcon from "@mui/icons-material/FlashOn";
+import CancelIcon from "@mui/icons-material/Cancel";
 import PleasentIcon from "@mui/icons-material/Cloud";
 import { useWeather } from "../../hooks/useGetWeather";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { removeLocation } from "../../redux/slices/location.slice";
 
@@ -33,20 +30,12 @@ interface IWeatherCardProps {
 }
 
 export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
-  const { data: weather, status, isLoading } = useWeather(location);
+  const { data: weather, error, isLoading } = useWeather(location);
 
   const renderIcon = () => {
     if (!weather) {
       return;
     }
-
-    /*return weather.feelsLike < COLD_TEMPERATURE ? (
-      <ColdIcon sx={coldIconStyle} />
-    ) : weather.feelsLike > HOT_TEMPERATURE ? (
-      <HotICon sx={hotIconStyle} />
-    ) : (
-      <PleasentIcon sx={pleasentIconStyle} />
-    );*/
 
     if (weather.feelsLike < COLD_TEMPERATURE) {
       return <ColdIcon sx={coldIconStyle} />;
@@ -65,17 +54,23 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
     dispatch(removeLocation(location));
   };
 
+  const stats = [
+    { title: `טמפ' נמדדת`, value: `${weather?.temperature}°C` },
+    { title: `טמפ' מורגשת`, value: `${weather?.feelsLike}°C` },
+    { title: "לחות", value: `${weather?.humidity}%` },
+  ];
+
   return (
     <>
-      {status === EStatus.Error && dispatch(removeLocation(location))}
+      {error && dispatch(removeLocation(location))}
 
-      {status === EStatus.Loading && (
+      {isLoading && (
         <Box display={"flex"} justifyContent={"center"}>
           <CircularProgress color="inherit" />
         </Box>
       )}
 
-      {status === EStatus.Success && (
+      {weather && (
         <>
           <Box
             padding={2}
@@ -85,10 +80,7 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
             bgcolor={theme.palette.secondary.main}
           >
             <Box sx={removeIconBoxStyle}>
-              <RemoveCircleIcon
-                sx={removeIconStyle}
-                onClick={handleRemoveButton}
-              />
+              <CancelIcon sx={removeIconStyle} onClick={handleRemoveButton} />
             </Box>
 
             <Box sx={headCardBoxStyle}>
@@ -101,24 +93,36 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
                 {weather.location}
               </Typography>
             </Box>
-            <Typography color={descriptionColor} sx={{ my: 1 }} align="right">
+
+            <Typography
+              color={descriptionColor}
+              sx={{ mt: 1, mb: 2 }}
+              align="right"
+            >
               {weather.description}
             </Typography>
-            <Box sx={statsDescBoxStyle}>
-              <Typography>טמפ' נמדדת</Typography>
-              <Typography mx={2}>טמפ' מורגשת</Typography>
-              <Typography mr={2}>לחות</Typography>
-            </Box>
-            <Box justifyContent={"center"} sx={statsBoxStyle}>
-              <Typography variant="h5" fontWeight={"medium"}>
-                {weather.temperature}°C
-              </Typography>
-              <Typography variant="h5" fontWeight={"medium"}>
-                {weather.feelsLike}°C
-              </Typography>
-              <Typography variant="h5" fontWeight={"medium"}>
-                {weather.humidity}%
-              </Typography>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                flexDirection: "row-reverse",
+              }}
+            >
+              {stats.map((stat) => (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography>{stat.title}</Typography>
+                  <Typography variant="h5" my={2}>
+                    {stat.value}
+                  </Typography>
+                </Box>
+              ))}
             </Box>
           </Box>
         </>

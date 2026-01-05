@@ -22,7 +22,6 @@ export const cardBoxStyle = {
 };
 
 export const removeIconBoxStyle = {
-  mb: 2,
   display: "flex",
   justifyContent: "flex-end",
 };

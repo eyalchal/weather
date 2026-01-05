@@ -13,11 +13,9 @@ export const Forecast: FC = () => {
     <Container maxWidth="lg">
       <Grid
         container
-        spacing={20}
+        spacing={30}
         padding={20}
-        columnSpacing={30}
-        alignItems="center"
-        justifyContent="center"
+        justifyContent="space-around"
       >
         {locations.map((location) => (
           <Grid size={gridSize} key={location}>

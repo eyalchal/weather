@@ -6,10 +6,10 @@ import {
 } from "./InsertLocation.style";
 
 import { useDispatch } from "react-redux";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, InputLabel, TextField } from "@mui/material";
 import { useState, type FC, type KeyboardEvent } from "react";
 import { addLocation } from "../../redux/slices/location.slice";
-import { buttonText, Enter, label } from "../../constants/insertlocation.constant";
+import { BUTTON_TEXT, LABEL } from "../../constants/insertlocation.constant";
 
 export const InsertLocation: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -21,7 +21,7 @@ export const InsertLocation: FC = () => {
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === Enter) {
+    if (event.key === "Enter") {
       dispatchAddLocation();
     }
   };
@@ -34,7 +34,7 @@ export const InsertLocation: FC = () => {
     <>
       <Box sx={boxStyle}>
         <TextField
-          label={label}
+          label={LABEL}
           value={inputValue}
           variant="outlined"
           sx={textFieldStyle}
@@ -47,7 +47,7 @@ export const InsertLocation: FC = () => {
           variant="contained"
           onClick={handleButtonClick}
         >
-          {buttonText}
+          {BUTTON_TEXT}
         </Button>
       </Box>
     </>

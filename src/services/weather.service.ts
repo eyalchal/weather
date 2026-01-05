@@ -4,23 +4,23 @@ import type { WeatherApiResponse } from "../interfaces/weather-api.interface";
 export const fetchWeather = async (
   location: string
 ): Promise<WeatherApiResponse> => {
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=he&appid=${API_KEY}`
-  );
+  try {
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=he&appid=${API_KEY}`
+    );
 
-  if (res.ok) {
+    const data = await res.json();
     console.log(`Weather successfuly fetched for ${location}`);
-  } else {
+
+    return {
+      location: data.name,
+      humidity: data.main.humidity,
+      temperature: Math.round(data.main.temp),
+      description: data.weather[0].description,
+      feelsLike: Math.round(data.main.feels_like),
+    };
+  } catch (error) {
     console.log(`Failed to fetch weather for ${location}`);
+    throw error;
   }
-
-  const data = await res.json();
-
-  return {
-    location: data.name,
-    humidity: data.main.humidity,
-    temperature: Math.round(data.main.temp),
-    description: data.weather[0].description,
-    feelsLike: Math.round(data.main.feels_like),
-  };
 };
