@@ -1,23 +1,14 @@
 import {
-  hotIconStyle,
-  cardBoxStyle,
-  coldIconStyle,
-  removeIconStyle,
-  headCardBoxStyle,
-  descriptionColor,
-  pleasentIconStyle,
-  removeIconBoxStyle,
-} from "./weathercard.style";
-
-import {
   HOT_TEMPERATURE,
   COLD_TEMPERATURE,
+  descriptionColor,
 } from "../../constants/weathercard.constant";
 
 import type { FC } from "react";
 import { useDispatch } from "react-redux";
-import { black, theme } from "../../style";
-import HotICon from "@mui/icons-material/Sunny";
+import { BLACK, theme } from "../../style";
+import { useStyles } from "./weathercard.style";
+import HotIcon from "@mui/icons-material/Sunny";
 import ColdIcon from "@mui/icons-material/FlashOn";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PleasentIcon from "@mui/icons-material/Cloud";
@@ -32,20 +23,22 @@ interface IWeatherCardProps {
 export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
   const { data: weather, error, isLoading } = useWeather(location);
 
+  const styles = useStyles();
+
   const renderIcon = () => {
     if (!weather) {
       return;
     }
 
     if (weather.feelsLike < COLD_TEMPERATURE) {
-      return <ColdIcon sx={coldIconStyle} />;
+      return <ColdIcon sx={styles.coldIcon} />;
     }
 
     if (weather.feelsLike > HOT_TEMPERATURE) {
-      return <HotICon sx={hotIconStyle} />;
+      return <HotIcon sx={styles.hotIcon} />;
     }
 
-    return <PleasentIcon sx={pleasentIconStyle} />;
+    return <PleasentIcon sx={styles.pleasentIcon} />;
   };
 
   const dispatch = useDispatch();
@@ -76,18 +69,18 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
             padding={2}
             borderRadius={2}
             component={"div"}
-            sx={cardBoxStyle}
+            sx={styles.cardBox}
             bgcolor={theme.palette.secondary.main}
           >
-            <Box sx={removeIconBoxStyle}>
-              <CancelIcon sx={removeIconStyle} onClick={handleRemoveButton} />
+            <Box sx={styles.removeIconBox}>
+              <CancelIcon sx={styles.removeIcon} onClick={handleRemoveButton} />
             </Box>
 
-            <Box sx={headCardBoxStyle}>
+            <Box sx={styles.cardHeadBox}>
               {renderIcon()}
               <Typography
                 variant="h5"
-                color={black}
+                color={BLACK}
                 sx={{ fontWeight: "bold" }}
               >
                 {weather.location}
@@ -102,21 +95,9 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
               {weather.description}
             </Typography>
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-around",
-                flexDirection: "row-reverse",
-              }}
-            >
+            <Box sx={styles.statsBox}>
               {stats.map((stat) => (
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
+                <Box sx={styles.statBox}>
                   <Typography>{stat.title}</Typography>
                   <Typography variant="h5" my={2}>
                     {stat.value}

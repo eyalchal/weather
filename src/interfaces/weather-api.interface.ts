@@ -1,7 +1,7 @@
 export interface WeatherApiResponse {
+  location: string;
   humidity: number;
   feelsLike: number;
-  location: string;
   description: string;
   temperature: number;
 }

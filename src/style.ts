@@ -9,4 +9,4 @@ export const theme = {
   },
 };
 
-export const black = "black";
+export const BLACK = "black";

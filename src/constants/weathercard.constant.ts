@@ -6,3 +6,5 @@ export const ICON_COLORS = {
   COLD: "#3F50B5",
   PLEASANT: "#68D0F1",
 };
+
+export const descriptionColor = "#8F8F8F";
