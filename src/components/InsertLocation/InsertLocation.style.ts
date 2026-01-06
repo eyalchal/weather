@@ -16,11 +16,22 @@ export const useStyles = () =>
       backgroundColor: theme.palette.secondary.main,
     },
     textField: {
+      // "& .MuiInputLabel-root": {
+      //   width: "100%",
+      //   textAlign: "center",
+      //   "&.Mui-focused": {
+      //     opacity: 0,
+      //   },
+      // },
+      "& input": {
+        textAlign: "center",
+      },
+
       "& .MuiOutlinedInput-notchedOutline": {
-        borderWidth: 4,
+        borderWidth: 3,
       },
       "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderWidth: 5,
+        borderWidth: 4,
       },
     },
     inputProps: {

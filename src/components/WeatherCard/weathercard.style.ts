@@ -30,13 +30,16 @@ export const useStyles = () =>
       justifyContent: "space-between",
     },
     statsBox: {
+      mb: 1,
       display: "flex",
       flexDirection: "row-reverse",
       justifyContent: "space-around",
     },
     statBox: {
+      p: 1,
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
+      justifyContent: "space-between",
     },
   });

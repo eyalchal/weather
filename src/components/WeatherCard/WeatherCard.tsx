@@ -66,9 +66,8 @@ export const WeatherCard: FC<IWeatherCardProps> = ({ location }) => {
       {weather && (
         <>
           <Box
-            padding={2}
+            padding={1}
             borderRadius={2}
-            component={"div"}
             sx={styles.cardBox}
             bgcolor={theme.palette.secondary.main}
           >
